@@ -1,0 +1,18 @@
+<html>
+<head>
+    <title>File stats</title>
+</head>
+<body>
+    <ul>
+    </ul>
+    <button><a href="/">Return</a></button>
+<script>
+    fetch("http://127.0.0.1:8001/get_stats")
+        .then(res => {return res.json();})
+        .then(stats => {
+                const markup = `<il>Number of files: ${stats.number}</il><br><il>Total size: ${stats.total_size} B</il><br><il>Mean size: ${stats.mean_size} B</il><br><il>Median size: ${stats.median_size} B</il><br>`;
+                document.querySelector('ul').insertAdjacentHTML('beforeend',markup);})
+</script>
+
+</body>
+</html>

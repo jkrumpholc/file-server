@@ -1,0 +1,35 @@
+<html>
+<head>
+    <title>Delete File</title>
+    <style>
+    table, th, td {
+        border: 1px solid black;
+        border-collapse: collapse;
+        padding: 4px;
+    }
+    </style>
+</head>
+<body>
+    <h1>Files:</h1>
+    <table>
+        <tr>
+            <th>File Name</th>
+            <th>Type</th>
+            <th>Size</th>
+            <th>Creation Date</th>
+            <th>Delete</th>
+        </tr>
+    </table>
+    <br>
+    <button><a href="/">Return</a></button>
+<script>
+    fetch("http://127.0.0.1:8001/list_files")
+        .then(res => {return res.json();})
+        .then(data => {
+            data.files.forEach(file => {
+                const markup = `<tr><td>${file.name}</td><td>${file.type}</td><td>${file.size}</td><td>${file.date}</td><td style="text-align:center"><button><a href="http://127.0.0.1:8001/delete_file?file=/upload/${file.name}.${file.type}">Delete</button></td></tr>`;
+                document.querySelector('table').insertAdjacentHTML('beforeend',markup);})})
+</script>
+
+</body>
+</html>
